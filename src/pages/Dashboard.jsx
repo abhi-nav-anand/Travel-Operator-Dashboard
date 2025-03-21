@@ -12,7 +12,6 @@ const Dashboard = () => {
   );
 };
 
-// Styling Objects
 const dashboardContainer = {
   padding: "20px",
   background: "#f8f9fa",
