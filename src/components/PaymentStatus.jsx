@@ -6,12 +6,10 @@ const PaymentStatus = () => {
   const [newPayment, setNewPayment] = useState({ customer: "", amount: "", status: "Pending" });
   const [editIndex, setEditIndex] = useState(null);
 
-  // Handle input change
   const handleInputChange = (e) => {
     setNewPayment({ ...newPayment, [e.target.name]: e.target.value });
   };
 
-  // Add or Update Payment
   const handleAddOrUpdatePayment = () => {
     if (!newPayment.customer || !newPayment.amount || !newPayment.status) {
       alert("Please fill all fields");
@@ -19,26 +17,22 @@ const PaymentStatus = () => {
     }
 
     if (editIndex !== null) {
-      // Update existing payment
       const updatedPayments = [...payments];
       updatedPayments[editIndex] = { ...updatedPayments[editIndex], ...newPayment };
       setPayments(updatedPayments);
       setEditIndex(null);
     } else {
-      // Add new payment with a unique ID
       setPayments([...payments, { id: Date.now(), ...newPayment }]);
     }
 
-    setNewPayment({ customer: "", amount: "", status: "Pending" }); // Reset form
+    setNewPayment({ customer: "", amount: "", status: "Pending" }); 
   };
 
-  // Delete Payment
   const handleDeletePayment = (id) => {
     const updatedPayments = payments.filter((payment) => payment.id !== id);
     setPayments(updatedPayments);
   };
 
-  // Edit Payment
   const handleEditPayment = (index) => {
     setNewPayment(payments[index]);
     setEditIndex(index);
@@ -48,7 +42,6 @@ const PaymentStatus = () => {
     <div style={containerStyle}>
       <h2 style={headingStyle}>Payment Status</h2>
 
-      {/* Add/Edit Payment Form */}
       <div style={formContainerStyle}>
         <input type="text" name="customer" value={newPayment.customer} onChange={handleInputChange} placeholder="Customer Name" style={inputStyle} />
         <input type="number" name="amount" value={newPayment.amount} onChange={handleInputChange} placeholder="Amount" style={inputStyle} />
@@ -60,8 +53,6 @@ const PaymentStatus = () => {
           {editIndex !== null ? "Update Payment" : "Add Payment"}
         </button>
       </div>
-
-      {/* Payment Table */}
       <table style={tableStyle}>
         <thead>
           <tr style={headerRowStyle}>
@@ -91,7 +82,6 @@ const PaymentStatus = () => {
   );
 };
 
-// Styles
 const containerStyle = {
   padding: "20px",
   background: "#f8f9fa",

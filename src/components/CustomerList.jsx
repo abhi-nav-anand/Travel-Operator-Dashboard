@@ -6,12 +6,10 @@ const CustomerList = () => {
   const [newUser, setNewUser] = useState({ name: "", email: "", phone: "" });
   const [editIndex, setEditIndex] = useState(null);
 
-  // Handle input changes
   const handleInputChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
-  // Add or Update Customer
   const handleAddOrUpdateUser = () => {
     if (!newUser.name || !newUser.email || !newUser.phone) {
       alert("Please fill all fields");
@@ -19,26 +17,22 @@ const CustomerList = () => {
     }
 
     if (editIndex !== null) {
-      // Update existing user
       const updatedUsers = [...users];
       updatedUsers[editIndex] = { ...updatedUsers[editIndex], ...newUser };
       setUsers(updatedUsers);
       setEditIndex(null);
     } else {
-      // Add new user
       setUsers([...users, { id: users.length + 1, ...newUser }]);
     }
 
-    setNewUser({ name: "", email: "", phone: "" }); // Reset form
+    setNewUser({ name: "", email: "", phone: "" });
   };
 
-  // Delete Customer
   const handleDeleteUser = (index) => {
     const updatedUsers = users.filter((_, i) => i !== index);
     setUsers(updatedUsers);
   };
 
-  // Edit Customer
   const handleEditUser = (index) => {
     setNewUser(users[index]);
     setEditIndex(index);
@@ -48,7 +42,6 @@ const CustomerList = () => {
     <div style={containerStyle}>
       <h2 style={headingStyle}>Customer List</h2>
 
-      {/* Add/Edit Customer Form */}
       <div style={formContainerStyle}>
         <input type="text" name="name" value={newUser.name} onChange={handleInputChange} placeholder="Name" style={inputStyle} />
         <input type="email" name="email" value={newUser.email} onChange={handleInputChange} placeholder="Email" style={inputStyle} />
@@ -58,7 +51,6 @@ const CustomerList = () => {
         </button>
       </div>
 
-      {/* Customer Table */}
       <table style={tableStyle}>
         <thead>
           <tr style={headerRowStyle}>
@@ -86,7 +78,6 @@ const CustomerList = () => {
   );
 };
 
-// Styles
 const containerStyle = {
   padding: "20px",
   background: "#f8f9fa",

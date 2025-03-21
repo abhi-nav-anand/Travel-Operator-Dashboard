@@ -6,12 +6,10 @@ const BookingList = () => {
   const [newBooking, setNewBooking] = useState({ customer: "", destination: "", status: "Pending" });
   const [editIndex, setEditIndex] = useState(null);
 
-  // Handle input changes
   const handleInputChange = (e) => {
     setNewBooking({ ...newBooking, [e.target.name]: e.target.value });
   };
 
-  // Add or Update Booking
   const handleAddOrUpdateBooking = () => {
     if (!newBooking.customer || !newBooking.destination) {
       alert("Please fill all fields");
@@ -19,26 +17,22 @@ const BookingList = () => {
     }
 
     if (editIndex !== null) {
-      // Update booking
       const updatedBookings = [...bookings];
       updatedBookings[editIndex] = { ...updatedBookings[editIndex], ...newBooking };
       setBookings(updatedBookings);
       setEditIndex(null);
     } else {
-      // Add new booking
       setBookings([...bookings, { id: bookings.length + 1, ...newBooking }]);
     }
 
     setNewBooking({ customer: "", destination: "", status: "Pending" }); // Reset form
   };
 
-  // Delete Booking
   const handleDeleteBooking = (index) => {
     const updatedBookings = bookings.filter((_, i) => i !== index);
     setBookings(updatedBookings);
   };
 
-  // Edit Booking
   const handleEditBooking = (index) => {
     setNewBooking(bookings[index]);
     setEditIndex(index);
@@ -48,7 +42,6 @@ const BookingList = () => {
     <div style={containerStyle}>
       <h2 style={headingStyle}>Booking List</h2>
 
-      {/* Add/Edit Booking Form */}
       <div style={formContainerStyle}>
         <input type="text" name="customer" value={newBooking.customer} onChange={handleInputChange} placeholder="Customer Name" style={inputStyle} />
         <input type="text" name="destination" value={newBooking.destination} onChange={handleInputChange} placeholder="Destination" style={inputStyle} />
@@ -62,7 +55,6 @@ const BookingList = () => {
         </button>
       </div>
 
-      {/* Booking Table */}
       <table style={tableStyle}>
         <thead>
           <tr style={headerRowStyle}>
@@ -92,7 +84,6 @@ const BookingList = () => {
   );
 };
 
-// Styles
 const containerStyle = {
   padding: "20px",
   background: "#f8f9fa",

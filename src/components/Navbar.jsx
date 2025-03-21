@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav style={navbarStyle}>
-      <div style={logoStyle}>🌍 Travel Operator Dashboard</div>
+      <div style={logoStyle}>Travel Operator Dashboard</div>
     </nav>
   );
 };
